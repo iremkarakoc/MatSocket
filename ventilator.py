@@ -17,16 +17,18 @@ print("Please enter the root to find the solution: ")
 root =int( input())
 
 
-context = zmq.Context() #created the context to create socket
-# sink connection --- request-reply  pattern used
+context = zmq.Context() # Created the context to create socket
+
+
+# ventilator-sink connection (REQUEST-REPLY PATTERN)
 sink = context.socket(zmq.REQ)
 sink.connect('tcp://127.0.0.1:5557')
 sink.send_pyobj(degree_num)
 s = sink.recv()
 
-#worker connection -- parallel pipeline pattern used
+# ventilator-worker connection (PARALLEL PIPELINE MODEL)
 sender = context.socket(zmq.PUSH)
-sender.bind("tcp://127.0.0.1:7000")   # Server is ready listening on port 7000"
+sender.bind("tcp://127.0.0.1:7000")   
 print("Press any key to start to send message to the workers!")
 _ = input()
 
