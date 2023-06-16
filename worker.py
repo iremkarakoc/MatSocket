@@ -1,6 +1,5 @@
 import zmq
 
-
 # ventilator-worker connection (PARALLEL PIPELINE PATTERN)
 context = zmq.Context()
 receiver = context.socket(zmq.PULL) 
@@ -19,6 +18,4 @@ while True:
     print("term number that workers running on it %d: result : %d " %(term[3], term_result))
     sender.send_pyobj(term_result)
     print("Finished!")
-    
-
 
